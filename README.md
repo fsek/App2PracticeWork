@@ -32,10 +32,10 @@ first (google does a good job of guiding you through this).
 Let's get to the actual practices. 
 
 ### **Task 1**
-Change the text of one of the buttons in the "`other`" ("`övrig`" on the Swedish app version) tab of the app. 
+Change the text of the Sångbok button in the "other" ("övrig" on the Swedish app version) section of the app to something different. 
 
 ### **Task 2**
-Now it's time to make something of our own. Try to add a button in the "`other`" screen. Don't worry about making it 
+Now it's time to make something of our own. Try to add a button in the "other" screen. Don't worry about making it 
 do anything, that will be the next step :). Just make it appear where you want it with your chosen text. 
 
 ### **Task 3**
@@ -106,22 +106,21 @@ Try searching for the button you are trying to change the name of.
    bunch of categories with the applocalizations. These are used for giving the app different texts depending on "context", 
    in this case your app's language. If you then search for otherSongbook (just an example, works for other buttons 
    too) you will find two files containing that, one for Swedish and one for English, as well a value connected to 
-   it. This is the text you want to change. 
+   it. This is the text you want to change. To make the button still work we need to change the button's routemap key to what you changed the name to. So if you changed the Swedish version "Sångbok" in the routemap needs to be changed to what you changed in the translation file. 
 
-2. All you really need to do for this one is to add the text you want in the the corresponding section. No need to 
-   do it the "proper" way which is to use the translation files, unless you really want to. 
+2. All you really need to do for this one is to add the text you want the button to have in the the corresponding section. The sections are represented as list of names "categories", "about", "settings" and "support". The proper way, which for example the t.otherSongbook use it to create a new key value pair in the translation file you edited in the previous task. Then reference that with the Applocalizations variable (which is the `var t = AppLocalizations.of(context)!;`). But here we can just add it as hardcoded text to just see how we can change the buttons. 
 3. Looking at another screen (inside the "screens" folder), what we seem to need are a class that extends the statefulwidget. Easiest would just 
    be to copy this class as well as the _XxPageState and then remove the stuff we don't want. The only function we 
    need inside the second class is the build function which just need to return a widget. That can be an empty 
    Scaffold for example. If we want to make the page more interesting we can add stuff to the scaffold, e.g. an 
-   appbar, maybe a button etc. The build function returns what widget to create when the page is loaded.  
+   appbar, maybe a button etc. The build function returns what widget to create when the page is loaded. We also need to make sure the button sends us to this page, which we do by adding a key value pair to the RouteMap in the other.dart file. The value should be an object of the new page, similarily to how the other objects look. 
 
-4. The line you are looking for is the appbar attribute/parameter, all you need to do is give that the value of an AppBar object. So inside the scaffold you need to add "appBar: AppBar()". 
+4. The line you are looking for is the appbar attribute/parameter, all you need to do is give that the value of an AppBar object. So inside the scaffold you need to add `appBar: AppBar()`. 
 5. For this task there is a bit more things we need to do and understand. First of all, we need to add a body to our scaffold which is what the scaffold should actually contain. 
 
-   a) For the first assignment we are interested in adding the text, which is as easy as just giving the body a Text() widget. If we want to center it we could do that by "wrapping" it with(putting the Text widget inside) a Center widget. We also need the text to contain something, which we can do by creating an integer at the start of our class, before the build method. Then reference that variable in the widget like 'Text("$x")'.
+   a) For the first assignment we are interested in adding the text, which is as easy as just giving the body a Text() widget. If we want to center it we could do that by "wrapping" it with(putting the Text widget inside) a Center widget. We also need the text to contain something, which we can do by creating an integer, call it x, at the start of our class, before the build method. Then reference that variable in the widget like `Text("$x")`.
 
-   b) Now we just need to add a button that interacts with this variable. One way of adding multiple widgets to our scaffold is to make the body of the scaffold a column, and then make the children all the widgets we want to appear, from top to bottom. The column is a widget that orders widget and puts them in a column underneath each other. We can wrap the column in a center widget instead of the text widget so everything becomes centered. After that we just need a SizedBox to determine the dimensions of the button and make thhe child a TextButton. The last tricky part is that we need to add the setState method in the onPressed parameter. This is because we need to update the screen (reload it kind of) everytime we change the variable so that it is portrayed correctly, since the build method is only called once we open the screen and then only when we tell it to re update. Inside the setState we just need to tell it to add one to our variable. 
+   b) Now we just need to add a button that interacts with this variable. One way of adding multiple widgets to our scaffold is to make the body of the scaffold a column, and then make the children all the widgets we want to appear, from top to bottom. The column is a widget that orders widget and puts them in a column underneath each other. We can wrap the column in a center widget instead of the text widget so everything becomes centered. After that we just need a `SizedBox` to determine the dimensions of the button and make the child a `TextButton`. The last tricky part is that we need to add the `setState` method in the `onPressed` parameter. This is because we need to update the screen (reload it kind of) everytime we change the variable so that it is portrayed correctly, since the build method is only called once we open the screen and then only when we tell it to re update. Inside the `setState` we just need to tell it to add one to our variable. 
    
    **Below is a suggestion for what the code could look like since this explanation got a bit long.**
    ```
@@ -156,7 +155,7 @@ Try searching for the button you are trying to change the name of.
    - To render, or display, a widget on screen, the `build` method is called. It is called **every** time the widget state is updated. For instance: When a counter variable is changed, as in Task 4, `build` is called because the new counter value must be rendered. `setState` tells the system that we wish to call `build` again because we changed the state.
    - `dispose` is called **once** at the very end of a widget's life.
    `initState` is where we will fetch user data. 
-   First create the EpicUserPage widget with the basic Scaffold, AppBar and a button linking to it, as in Task X. In EpicUserPage, declare a `user` state variable of type `User?`. Inside `initState`, call 
+   First create the EpicUserPage widget with the basic Scaffold, AppBar and a button linking to it, as in Task 4. In EpicUserPage, declare a `user` state variable of type `User?`. Inside `initState`, call 
       ```
       locator<UserService>().getUser().then((userFromServer) {
          setState(() {
