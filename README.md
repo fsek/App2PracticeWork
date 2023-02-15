@@ -151,18 +151,19 @@ Try searching for the button you are trying to change the name of.
 
    The spacers are optional so as just to make some room in the column between the widgets. [Here](https://api.flutter.dev/flutter/widgets/Spacer-class.html) you can read more on how they work if you want to try them out.
 6. A quick Flutter recap: For a widget, there are three methods which are called at different times in its lifecycle. `initState`, `build`, and `dispose`.
-- To initialize, or set up, a widget, `initState` is called **once**, the first time a widget appears. 
-- To render, or display, a widget on screen, the `build` method is called. It is called **every** time the widget state is updated. For instance: When a counter variable is changed, as in Task 4, `build` is called because the new counter value must be rendered. `setState` tells the system that we wish to call `build` again because we changed the state.
-- `dispose` is called **once** at the very end of a widget's life.
-`initState` is where we will fetch user data. 
-First create the EpicUserPage widget with the basic Scaffold, AppBar and a button linking to it, as in Task X. In EpicUserPage, declare a `user` state variable of type `User?`. Inside `initState`, call 
-   ```
-   locator<UserService>().getUser().then((userFromServer) {
-      setState(() {
-         user = userFromServer;
+
+   - To initialize, or set up, a widget, `initState` is called **once**, the first time a widget appears. 
+   - To render, or display, a widget on screen, the `build` method is called. It is called **every** time the widget state is updated. For instance: When a counter variable is changed, as in Task 4, `build` is called because the new counter value must be rendered. `setState` tells the system that we wish to call `build` again because we changed the state.
+   - `dispose` is called **once** at the very end of a widget's life.
+   `initState` is where we will fetch user data. 
+   First create the EpicUserPage widget with the basic Scaffold, AppBar and a button linking to it, as in Task X. In EpicUserPage, declare a `user` state variable of type `User?`. Inside `initState`, call 
+      ```
+      locator<UserService>().getUser().then((userFromServer) {
+         setState(() {
+            user = userFromServer;
+         });
       });
-   });
-   ```
+      ```
    VSCode should help you auto import `User` and `locator`. For `UserService` you might have to manually add this line to the top of the file containng EpicUserPage.
    ```
    import 'package:fsek_mobile/services/user.service.dart';
