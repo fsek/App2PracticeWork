@@ -55,7 +55,7 @@ s
 Now we will create a new page (or screen) called EpicUserPage, for showing some user data. This data is fetched from the backend using a GET request. Create a new button on the Other screen which links to a new empty page, just like in Task 3. On this new page, use the Text widget to display the name and email of the currently logged in user. 
 
 ### **Task 7**
-Now we will add a button to EpicUserPage which will change the name of the user. Since this action aims to change data on the backend, a GET request won't do. In our case, we will send a PUT request to update the name. Add a TextButton which changes the user's `firstname` and `lastname` to a something of your choosing.
+Now we will add a button to EpicUserPage which will change the name of the user. Since this action aims to change data on the backend, a GET request won't do. In our case, we will send a PUT request to update the name. Add a TextButton which changes the user's `firstname` and `lastname` to something of your choosing.
 
 ### **Task 8**
 Let's do something that is a bit more confusing to find where you are supposed to look. With patience and some logical thinking we 
